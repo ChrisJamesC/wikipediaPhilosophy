@@ -37,3 +37,8 @@ input#search {
     bottom:10px; 
     right: 10px; 
 }  
+#share {
+    position: fixed; 
+    bottom:10px; 
+    left: 10px; 
+}  
