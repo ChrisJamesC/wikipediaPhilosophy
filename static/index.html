@@ -5,10 +5,20 @@
    <script src="static/app.js"></script>
    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
    <link rel="stylesheet" type="text/css" href="static/style.css"/>
-   <link rel="image_src" href="static/philosophy.jpg" />
+   <link rel="image_src" href="static/philosophy.png" />
 </head>
 
 <body>
+   <!-- Start of fb code-->
+   <div id="fb-root"></div>
+   <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=565198463498975";
+                fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+   <!-- End of fb code -->
     <div id="content-container">
    <h1>The Wikipedia Philosophy game!</h1>
    <p>
@@ -36,15 +46,8 @@
    </div>
 
    <div id="share">
-        <!-- AddThis Button BEGIN -->
-      <div class="addthis_toolbox addthis_default_style ">
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-      <a class="addthis_button_tweet"></a>
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-      <a class="addthis_counter addthis_pill_style"></a>
-      </div>
-      <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52420d294c71d444"></script>
-      <!-- AddThis Button END -->
-    </div>
+      <div class="fb-like" data-href="http://wikipediaphilosophy.christopherchiche.com/" data-width="450" data-layout="button_count" data-show-faces="true" data-send="false"></div>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://wikipediaphilosophy.christopherchiche.com/" data-via="ChrisJamesC">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   </div>
 </body>
