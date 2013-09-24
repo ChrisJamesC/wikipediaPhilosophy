@@ -91,21 +91,10 @@ def crowl():
    link = "/wiki/"+urllib2.quote(name,safe=":/")
    print("LINK:"+link)
    try:
-      res = iterateThroughPages(link)
-      return res
+      return iterateThroughPages(link)
    except:
-      res = {"result": "Internal error"}
+      return {"result": "Internal error"}
 
 #run(host='localhost', port=80)
 application = default_app()
-
-ex1 = "/wiki/Hurricane_Ingrid_(2013)"
-ex2 = "/wiki/Logic"
-ex3 = "/wiki/Savoie"
-ex4 = "/wiki/Julie_(given_name)"
-ex5 = "/wiki/USA"
-ex6 = "/wiki/United_States"
-#iterateThroughPages(ex6)
-
-
 
