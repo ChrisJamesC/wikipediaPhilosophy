@@ -1,29 +1,28 @@
 import urllib2
 from bs4 import BeautifulSoup
-from bottle import route, run, template, static_file,request
+from bottle import route, run, template, static_file,request, default_app
 import time
-from HTMLParser import HTMLParseError
 
-template = "http://en.wikipedia.org"
+template = "https://wikipedia.org"
 philosophy_link = "/wiki/Philosophy"
 philosophy_title = "Philosophy"
 cache = {}
 deprecated=24*60*60 #One day in seconds
 
 def isValid(ref,paragraph):
-   if not ref or "#" in ref or "//" in ref: 
+   if not ref or "#" in ref or "//" in ref:
       return False
-   if "/wiki/" not in ref: 
+   if "/wiki/" not in ref:
       return False
    if ref not in paragraph:
       return False
    prefix = paragraph.split(ref,1)[0]
-   if prefix.count("(")!=prefix.count(")"): 
+   if prefix.count("(")!=prefix.count(")"):
       return False
    return True
 
 def validateTag(tag):
-   name = tag.name 
+   name = tag.name
    isParagraph = name == "p"
    isList = name == "ul"
    return isParagraph or isList
@@ -33,7 +32,7 @@ def getFirstLink(wikipage):
       cached = cache[wikipage]
       if time.time()-cached["time"]<deprecated:
          return cached["value"]
-   req = urllib2.Request(template+wikipage, headers={'User-Agent' : "Magic Browser"}) 
+   req = urllib2.Request(template+wikipage, headers={'User-Agent' : "Magic Browser"})
    page = urllib2.urlopen(req)
    data = page.read()
    soup = BeautifulSoup(data)
@@ -46,7 +45,7 @@ def getFirstLink(wikipage):
             return link
    return False
 
-def iterateThroughPages(firstLink): 
+def iterateThroughPages(firstLink):
    steps = []
    out = []
    link = firstLink
@@ -56,11 +55,11 @@ def iterateThroughPages(firstLink):
       if not link:
          result = "No first link found in: "+steps[-1]
          break
-      if link == philosophy_link: 
+      if link == philosophy_link:
          result = philosophy_title+" found after "+str(len(steps))+" clics!"
          break
       current = getFirstLink(link)
-      if not current: 
+      if not current:
          result = "No first link in page"
          break
       link = current.get("href")
@@ -69,7 +68,7 @@ def iterateThroughPages(firstLink):
       if link not in steps:
          steps.append(link)
          out.append({
-            'link':template+link, 
+            'link':template+link,
             'title':title
          })
       else:
@@ -79,8 +78,8 @@ def iterateThroughPages(firstLink):
 
 
 @route('/')
-def index(): 
-   return static_file("index.html", root="static")
+def index():
+   return static_file("index.html", root="/home/ChrisJamesC/wikipediaPhilosophy/static")
 
 @route('/static/<filename>')
 def server_static(filename):
@@ -97,7 +96,8 @@ def crowl():
    except:
       res = {"result": "Internal error"}
 
-run(host='localhost', port=80)
+#run(host='localhost', port=80)
+application = default_app()
 
 ex1 = "/wiki/Hurricane_Ingrid_(2013)"
 ex2 = "/wiki/Logic"
@@ -105,7 +105,7 @@ ex3 = "/wiki/Savoie"
 ex4 = "/wiki/Julie_(given_name)"
 ex5 = "/wiki/USA"
 ex6 = "/wiki/United_States"
-iterateThroughPages(ex6)
+#iterateThroughPages(ex6)
 
-   
+
 
