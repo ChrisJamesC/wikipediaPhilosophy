@@ -1,6 +1,16 @@
-body {
+
+
+ body{
+   background-image: url(texture.png); 
+  background-repeat: repeat;  
+   font-family: "Trebuchet MS", helvetica, sans-serif; 
+} 
+
+#content-container {
    margin: 10% auto; 
-   width:500px
+   width:500px;
+   position: relative;
+   font-family: "Trebuchet MS", helvetica, sans-serif; 
 }
 
 input#search {
@@ -22,3 +32,8 @@ input#search {
 #crowl-result {
    font-weight:bold;
 }
+#author {
+    position: fixed; 
+    bottom:10px; 
+    right: 10px; 
+}  

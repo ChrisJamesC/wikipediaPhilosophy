@@ -34,7 +34,8 @@ function formatTitle(title){
 }
 
 function crowl(title){
-   console.log("Let's crowl "+title)
+   $("crowl-steps").html("") 
+   $("crowl-result").html("Waiting...")
    $.ajax({
       url: "crowl",
       data: {title:formatTitle(title)}, 

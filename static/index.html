@@ -8,16 +8,29 @@
 </head>
 
 <body>
+    <div id="content-container">
    <h1>The Wikipedia Philosophy game!</h1>
+   <p>
    Search any wikipedia (english) article and see how
    many times you need to click on the first link 
    to reach Philosophy!
-
+   </p>
+   <p>
+   <a href="http:/github.com/ChrisJamesC/wikipediaPhilosophy">Fork me on github</a>
+   </p> 
+   <p> 
+   Any help on design would be greatly appreciated. 
+   </p>
    <div id="search-container">
-      <input id="search" type="text"></input>
+       <input id="search" type="text" onkeypress"searchKeyPress(event)"></input>
    </div>
    <div id="results">
       <div id="crowl-steps"></div>
       <div id="crowl-result"></div>
    </div>
+   </div>
+   <div id="author">
+    Copyright &copy 2013 Christopher chiche
+   </div>
+
 </body>
