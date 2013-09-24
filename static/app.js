@@ -40,7 +40,6 @@ function crowl(title){
       url: "crowl",
       data: {title:formatTitle(title)}, 
       success: function(data){
-         console.log(data)
          $("#crowl-steps").html(createStepsList(data.steps)) 
          $("#crowl-result").html(data.result)
       }, 
