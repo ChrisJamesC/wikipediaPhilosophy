@@ -93,7 +93,7 @@ def crowl():
    try:
       return iterateThroughPages(link)
    except:
-      return {"result": "Internal error"}
+      return {"result": "Internal error", "steps":[]}
 
 #run(host='localhost', port=80)
 application = default_app()
