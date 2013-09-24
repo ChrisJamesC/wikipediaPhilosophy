@@ -57,7 +57,7 @@ function searchKeyPress(e){
    if (typeof e == 'undefined' && window.event) { e = window.event; }
       if (e.keyCode == 13)
       {
-         value = $('#search').value;
+         value = $('#search').val();
          $( "#search" ).autocomplete( "close" );
          crowl(value)
       }
