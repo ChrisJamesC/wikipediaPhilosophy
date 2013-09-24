@@ -10,7 +10,7 @@ cache = {}
 deprecated=24*60*60 #One day in seconds
 
 def isValid(ref,paragraph):
-   if not ref or "#" in ref or "//" in ref:
+   if not ref or "#" in ref or "//" in ref or ":" in ref:
       return False
    if "/wiki/" not in ref:
       return False
