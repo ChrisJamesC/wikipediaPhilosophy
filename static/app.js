@@ -34,8 +34,8 @@ function formatTitle(title){
 }
 
 function crowl(title){
-   $("crowl-steps").html("") 
-   $("crowl-result").html("Waiting...")
+   $("#crowl-steps").html("") 
+   $("#crowl-result").html("Waiting...")
    $.ajax({
       url: "crowl",
       data: {title:formatTitle(title)}, 
@@ -58,7 +58,7 @@ function searchKeyPress(e){
       if (e.keyCode == 13)
       {
          value = $('#search').val();
-         console.log("search: "+value)
+         $( "#search" ).autocomplete( "close" );
          crowl(value)
       }
  }
