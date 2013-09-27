@@ -3,13 +3,20 @@ from bs4 import BeautifulSoup
 from bottle import route, run, template, static_file,request, default_app
 import time
 
-template = "https://wikipedia.org"
+# Conventions: 
+# A link is of form "/wiki/United_States"
+# A title is of form "United States"
+
+template = "https://en.wikipedia.org"
 philosophy_link = "/wiki/Philosophy"
 philosophy_title = "Philosophy"
 cache = {}
-deprecated=24*60*60 #One day in seconds
+deprecated=24*60*60 # One day in seconds
+
+local = True
 
 def isValid(ref,paragraph):
+   # Check whether the reference is valid in the paragraph
    if not ref or "#" in ref or "//" in ref or ":" in ref:
       return False
    if "/wiki/" not in ref:
@@ -22,35 +29,49 @@ def isValid(ref,paragraph):
    return True
 
 def validateTag(tag):
+   # Check whether the tag is one in which we could find a valid link 
    name = tag.name
    isParagraph = name == "p"
    isList = name == "ul"
    return isParagraph or isList
 
-def getFirstLink(wikipage):
-   if wikipage in cache:
-      cached = cache[wikipage]
-      if time.time()-cached["time"]<deprecated:
-         return cached["value"]
-   req = urllib2.Request(template+wikipage, headers={'User-Agent' : "Magic Browser"})
-   page = urllib2.urlopen(req)
-   data = page.read()
+def getSoup(address): 
+   req = urllib2.Request(address, headers={'User-Agent' : "Magic Browser"})
+   data = urllib2.urlopen(req).read()
    soup = BeautifulSoup(data)
    soup = soup.find(id="mw-content-text")
+   return soup
+
+def titleToLink(title): return "/wiki/"+title
+def linkToTitle(link): return link[6:]
+
+def getFirstLink(link):
+   
+   if link in cache:
+      cached = cache[link]
+      if time.time()-cached["time"]<deprecated:
+         return cached["value"]
+   
+   title = linkToTitle(link)
+   print title
+   soup = getSoup("http://en.wikipedia.org/w/index.php?title="+title+"&printable=yes")
+   if not soup: 
+      return False
+
    for paragraph in soup.find_all(validateTag, recursive=False):
-      for link in paragraph.find_all("a"):
-         ref = link.get("href")
+      for newLink in paragraph.find_all("a"):
+         ref = newLink.get("href")
          if isValid(str(ref),str(paragraph)):
-            cache[wikipage]={"value":link,"time":time.time()}
-            return link
+            cache[link]={"value":newLink,"time":time.time()}
+            return newLink
    return False
 
-def iterateThroughPages(firstLink):
+def iterateThroughPages(title):
    steps = []
    out = []
-   link = firstLink
-   title = ""
+   link = "/wiki/"+title
    result = ""
+   first = True
    while link is not philosophy_link:
       if not link:
          result = "No first link found in: "+steps[-1]
@@ -59,12 +80,12 @@ def iterateThroughPages(firstLink):
          result = philosophy_title+" found after "+str(len(steps))+" clics!"
          break
       current = getFirstLink(link)
+
       if not current:
          result = "No first link in page"
          break
       link = current.get("href")
       title = current.get("title")
-      print title
       if link not in steps:
          steps.append(link)
          out.append({
@@ -79,7 +100,7 @@ def iterateThroughPages(firstLink):
 
 @route('/')
 def index():
-   return static_file("index.html", root="/home/ChrisJamesC/wikipediaPhilosophy/static")
+   return static_file("index.html", root="static")
 
 @route('/static/<filename>')
 def server_static(filename):
@@ -88,13 +109,17 @@ def server_static(filename):
 @route('/crowl')
 def crowl():
    name = request.GET.get('title')
-   link = "/wiki/"+urllib2.quote(name,safe=":/")
-   print("LINK:"+link)
-   try:
-      return iterateThroughPages(link)
-   except:
-      return {"result": "Internal error", "steps":[]}
+   title = urllib2.quote(name,safe=":/")
+   if local: 
+      return iterateThroughPages(title)
+   else: 
+      try:
+         return iterateThroughPages(title)
+      except:
+         return {"result": "Internal error", "steps":[]}
 
-#run(host='localhost', port=80)
-application = default_app()
+if local: 
+   run(host='localhost', port=8080)
+else: 
+   application = default_app()
 
