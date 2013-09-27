@@ -13,7 +13,7 @@ philosophy_title = "Philosophy"
 cache = {}
 deprecated=24*60*60 # One day in seconds
 
-local = True
+local = False
 
 def isValid(ref,paragraph):
    # Check whether the reference is valid in the paragraph
