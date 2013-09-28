@@ -77,7 +77,7 @@ def iterateThroughPages(title):
          result = "No first link found in: "+steps[-1]
          break
       if link == philosophy_link:
-         result = philosophy_title+" found after "+str(len(steps))+" clics!"
+         result = philosophy_title+" found after "+str(len(steps))+" clicks!"
          break
       current = getFirstLink(link)
 
@@ -100,7 +100,10 @@ def iterateThroughPages(title):
 
 @route('/')
 def index():
-   return static_file("index.html", root="static")
+   if local: 
+      return static_file("index.html", root="static")
+   else: 
+      return static_file("index.html", root="/home/ChrisJamesC/wikipediaPhilosophy/static")
 
 @route('/static/<filename>')
 def server_static(filename):
