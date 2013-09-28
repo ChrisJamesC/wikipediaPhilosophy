@@ -13,7 +13,7 @@ philosophy_title = "Philosophy"
 cache = {}
 deprecated=24*60*60 # One day in seconds
 
-local = False
+local = True
 
 def isValid(ref,paragraph):
    # Check whether the reference is valid in the paragraph
@@ -46,7 +46,6 @@ def titleToLink(title): return "/wiki/"+title
 def linkToTitle(link): return link[6:]
 
 def getFirstLink(link):
-   
    if link in cache:
       cached = cache[link]
       if time.time()-cached["time"]<deprecated:
@@ -56,6 +55,10 @@ def getFirstLink(link):
    print title
    soup = getSoup("http://en.wikipedia.org/w/index.php?title="+title+"&printable=yes")
    if not soup: 
+      file = open("errorLog.txt", "w+")
+      file.write("No Soup!\n")
+      file.write(soup+"\n")
+      file.flush()
       return False
 
    for paragraph in soup.find_all(validateTag, recursive=False):
@@ -64,7 +67,12 @@ def getFirstLink(link):
          if isValid(str(ref),str(paragraph)):
             cache[link]={"value":newLink,"time":time.time()}
             return newLink
+   file = open("errorLog.txt", "w+")
+   file.write("No Link!\n")
+   file.write(soup+"\n")
+   file.flush()
    return False
+
 
 def iterateThroughPages(title):
    steps = []
