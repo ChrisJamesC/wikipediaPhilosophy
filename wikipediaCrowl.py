@@ -2,6 +2,7 @@ import urllib2
 from bs4 import BeautifulSoup
 from bottle import route, run, template, static_file,request, default_app
 import time
+import os
 
 # Conventions: 
 # A link is of form "/wiki/United_States"
@@ -13,7 +14,7 @@ philosophy_title = "Philosophy"
 cache = {}
 deprecated=24*60*60 # One day in seconds
 
-local = False
+local = os.environ.get('LOCAL') 
 
 def isValid(ref,paragraph):
    # Check whether the reference is valid in the paragraph
@@ -55,7 +56,7 @@ def getFirstLink(link):
    print title
    soup = getSoup("http://en.wikipedia.org/w/index.php?title="+title+"&printable=yes")
    if not soup: 
-      file = open("errorLog.txt", "w+")
+      file = open("/home/ChrisJamesC/wikipediaPhilosophy/errorLog.txt", "w+")
       file.write("No Soup!\n")
       file.write(soup+"\n")
       file.flush()
@@ -67,7 +68,7 @@ def getFirstLink(link):
          if isValid(str(ref),str(paragraph)):
             cache[link]={"value":newLink,"time":time.time()}
             return newLink
-   file = open("errorLog.txt", "w+")
+   file = open("/home/ChrisJamesC/wikipediaPhilosophy/errorLog.txt", "w+")
    file.write("No Link!\n")
    file.write(soup+"\n")
    file.flush()
