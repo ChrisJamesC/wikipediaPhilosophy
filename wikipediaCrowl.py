@@ -56,10 +56,6 @@ def getFirstLink(link):
    print title
    soup = getSoup("http://en.wikipedia.org/w/index.php?title="+title+"&printable=yes")
    if not soup: 
-      file = open("/home/ChrisJamesC/wikipediaPhilosophy/errorLog.txt", "w+")
-      file.write("No Soup!\n")
-      file.write(soup+"\n")
-      file.flush()
       return False
 
    for paragraph in soup.find_all(validateTag, recursive=False):
@@ -68,10 +64,6 @@ def getFirstLink(link):
          if isValid(str(ref),str(paragraph)):
             cache[link]={"value":newLink,"time":time.time()}
             return newLink
-   file = open("/home/ChrisJamesC/wikipediaPhilosophy/errorLog.txt", "w+")
-   file.write("No Link!\n")
-   file.write(soup+"\n")
-   file.flush()
    return False
 
 
