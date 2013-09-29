@@ -98,9 +98,9 @@ def iterateThroughPages(title):
          break
    return {'result':result, 'steps':out}
 
-
 @route('/')
 def index():
+   return static_file("index.html", root="/home/ChrisJamesC/wikipediaPhilosophy/static")
    if local: 
       return static_file("index.html", root="static")
    else: 
