@@ -1,21 +1,12 @@
-
-
- body{
-   background-image: url(texture.png); 
-  background-repeat: repeat;  
-   font-family: "Trebuchet MS", helvetica, sans-serif; 
-} 
-
 #content-container {
-   margin: 10% auto; 
-   width:500px;
+   margin: 5% auto; 
+   max-width:600px;
    position: relative;
-   font-family: "Trebuchet MS", helvetica, sans-serif; 
 }
 
 input#search {
-   width:500px;
-   height:36px; 
+   width:100%;
+   margin: auto;
    font-size: 30px;
 }
 
@@ -33,12 +24,5 @@ input#search {
    font-weight:bold;
 }
 #author {
-    position: fixed; 
-    bottom:10px; 
-    right: 10px; 
-}  
-#share {
-    position: fixed; 
-    bottom:10px; 
-    left: 10px; 
+    padding-top: 60px
 }  

@@ -1,53 +1,55 @@
 <head>
-   <title>Philosophy Game</title>
-   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-   <script src="static/app.js"></script>
-   <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
-   <link rel="stylesheet" type="text/css" href="static/style.css"/>
-   <link rel="image_src" href="static/philosophy.png" />
+  <title>Philosophy Game</title>
+  <meta http-equiv='Content-type' content='text/html; charset=utf-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="static/jquery-1.9.1.js"></script>
+  <script src="static/jquery-ui.js"></script>
+  <script src="static/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/jquery-ui.css"/>
+  <link rel="stylesheet" href="static/bootstrap-flatly.min.css" />
+  <link rel="stylesheet" type="text/css" href="static/style.css"/>
+  <link rel="image_src" href="static/philosophy.png" />
 </head>
 
 <body>
-   <!-- Start of fb code-->
-   <div id="fb-root"></div>
-   <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=565198463498975";
-                fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
-   <!-- End of fb code -->
-    <div id="content-container">
-   <h1>The Wikipedia Philosophy game!</h1>
-   <p>
-   Search any wikipedia (english) article and see how
-   many times you need to click on the first link of the article 
-   to reach Philosophy!
-   </p>
-   <p>
-   <a href="http://github.com/ChrisJamesC/wikipediaPhilosophy">Fork me on github!</a>
-   </p> 
-   <p> <i>
-      Any help on design would be greatly appreciated. 
-   </i>
-   </p>
-   <div id="search-container">
-       <input id="search" type="text" onkeypress="searchKeyPress(event)"></input>
-   </div>
-   <div id="results">
+  <!-- Start of fb code-->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=565198463498975";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  <!-- End of fb code -->
+  <div class="container" id="content-container">
+
+    <h1>The Wikipedia Philosophy game!</h1>
+    <p>
+    Search any wikipedia (english) article and see how
+    many times you need to click on the first link of the article 
+    to reach Philosophy!
+    </p>
+    <p>
+      <a href="http://github.com/ChrisJamesC/wikipediaPhilosophy">Fork me on github!</a>
+    </p> 
+    <div id="search-container">
+      <input id="search" type="text" onkeypress="searchKeyPress(event)"></input>
+    </div>
+    <div id="results">
       <div id="crowl-steps"></div>
       <div id="crowl-result"></div>
-   </div>
-   </div>
-   <div id="author">
-    Copyright &copy 2013 Christopher Chiche
-   </div>
+    </div>
+    <div id="footer">
+    <div id="author">
+      Copyright &copy 2013-2016 Christopher Chiche
+    </div>
 
-   <div id="share">
+    <div id="share">
       <div class="fb-like" data-href="http://wikipediaphilosophy.christopherchiche.com/" data-width="450" data-layout="button_count" data-show-faces="true" data-send="false"></div>
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bit.ly/1b4B6Ea" data-via="ChrisJamesC">Tweet</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-   </div>
+    </div>
+    </div>
+  </div>
 </body>
